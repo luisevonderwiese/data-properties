@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 def run_raxml_ng(df):
     for (i, row) in df.iterrows():
         msa_path = row["msa_paths"]["prototype_part_3"]
-        raxmlng.run_search1(msa_path, "MULTI8_GTR", util.prefix(results_dir, row, "raxmlng", "prototype_part_3"))
+        raxmlng.run_search1(msa_path, "MULTI7_GTR", util.prefix(results_dir, row, "raxmlng", "prototype_part_3"))
 
 def write_results_df(df):
     sampled_difficulties = []
@@ -61,7 +61,7 @@ def plot_heatmaps(df):
         if len(rates) == 0:
             continue
         print(row["ds_id"])
-        rate_matrix = to_matrix(rates, 8)
+        rate_matrix = to_matrix(rates, 7)
         rate_matrix = np.array(rate_matrix)
         for i in range(len(rate_matrix)):
             for j in range(i):
@@ -88,9 +88,9 @@ if not os.path.isdir(plots_dir):
 
 database.read_config(config_path)
 #database.download()
-database.compile()
+#database.compile()
 df = database.data()
 pd.set_option('display.max_rows', None)
 
-run_raxml_ng(df)
+#run_raxml_ng(df)
 plot_heatmaps(df)
